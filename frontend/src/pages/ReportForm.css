@@ -1,0 +1,48 @@
+/* ... existing styles ... */
+
+.current-image-preview {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.current-image-preview img {
+  display: block;
+  max-width: 200px;
+  max-height: 200px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.current-image-preview label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+}
+
+.current-image-preview input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.form-loading, .form-error, .form-success {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  text-align: center;
+}
+.form-loading {
+  color: #333;
+}
+.form-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+.form-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+/* ... rest of your form styles ... */

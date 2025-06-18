@@ -1,0 +1,153 @@
+.report-crime-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.report-form-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.report-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--dark-color);
+  font-size: 1.8rem;
+}
+
+.report-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.report-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.report-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.report-warning ul {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.report-warning a {
+  color: #856404;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.report-form .form-group {
+  margin-bottom: 20px;
+}
+
+.report-form .form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.report-form .form-input,
+.report-form .form-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.report-form .form-input:focus,
+.report-form .form-textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.report-form .form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-checkbox {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+.checkbox-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.file-input {
+  padding: 10px;
+}
+
+.image-preview {
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  max-width: 300px;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
+.report-button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.report-button:hover {
+  background-color: #2a75e6;
+}
+
+.report-button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .report-form-container {
+    padding: 20px;
+  }
+}
+

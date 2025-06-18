@@ -1,0 +1,130 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.auth-form-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--dark-color);
+  font-size: 1.8rem;
+}
+
+.auth-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.auth-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.auth-form .form-group {
+  margin-bottom: 20px;
+}
+
+.auth-form .form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.auth-form .form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.auth-form .form-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+  background-color: #2a75e6;
+}
+
+.auth-button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.auth-links {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.auth-links p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.auth-links a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.auth-subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+@media (max-width: 500px) {
+  .auth-form-container {
+    padding: 20px;
+  }
+}
+

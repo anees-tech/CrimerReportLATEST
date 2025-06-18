@@ -1,0 +1,458 @@
+.admin-report-details-container {
+  padding: 20px;
+}
+
+.admin-report-details-header {
+  margin-bottom: 20px;
+  display: flex; /* Added */
+  justify-content: space-between; /* Added */
+  align-items: center; /* Added */
+  flex-wrap: wrap; /* Added */
+  gap: 15px; /* Added to space out items like back-link, title-container, and delete button */
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.admin-report-details-title-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Kept for title/badge wrapping if necessary */
+  gap: 10px; /* Added for spacing between title and badge */
+  flex-grow: 1; /* Allow title container to take available space if needed */
+  justify-content: center; /* Center title and badge if they take up space */
+}
+
+.admin-report-details-title {
+  font-size: 1.8rem;
+  color: var(--dark-color);
+  margin: 0;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-pending {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.badge-investigating {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.badge-resolved {
+  background-color: #28a745;
+  color: white;
+}
+
+.badge-closed {
+  background-color: #6c757d;
+  color: white;
+}
+
+.admin-report-details-loading,
+.admin-report-details-error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.admin-report-details-error {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+.admin-update-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.admin-report-details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.admin-report-details-main,
+.admin-report-details-sidebar {
+  overflow-wrap: break-word;
+}
+.admin-report-details-card,
+.admin-actions-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.admin-report-details-section {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-report-details-section:last-child {
+  border-bottom: none;
+}
+
+.admin-actions-card {
+  padding: 20px;
+}
+
+.admin-actions-title {
+  font-size: 1.3rem;
+  color: var(--dark-color);
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.admin-status-form,
+.admin-note-form {
+  margin-top: 15px;
+}
+
+.admin-action-button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.admin-action-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.admin-action-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.report-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.report-info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-label {
+  font-weight: 600;
+  color: var(--dark-color);
+  margin-right: 10px;
+}
+
+.info-value {
+  color: #666;
+  text-align: right;
+  word-break: break-word;
+}
+
+.report-description {
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.report-image-preview-container {
+  text-align: center;
+}
+
+.report-image-preview {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* File upload styles */
+.form-file-input {
+  width: 100%;
+  padding: 8px;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-file-input:hover {
+  border-color: var(--primary-color);
+  background-color: #e9ecef;
+}
+
+.selected-file-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.file-icon {
+  font-size: 1.2rem;
+}
+
+.file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remove-file-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-file-btn:hover {
+  background: #c82333;
+}
+
+.file-help-text {
+  display: block;
+  margin-top: 4px;
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+/* Admin note attachment styles */
+.admin-note-attachment {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.attachment-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.attachment-icon {
+  font-size: 1.2rem;
+}
+
+.attachment-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #495057;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.download-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+}
+
+.download-btn:hover {
+  background: #0056b3;
+}
+
+.admin-notes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-note {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.admin-note-header {
+  margin-bottom: 10px;
+}
+
+.admin-note-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+.admin-note-content {
+  margin: 0;
+  line-height: 1.5;
+  color: #333;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Image zoom modal styles */
+.image-zoom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.image-zoom-modal-content {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.zoom-button {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.zoom-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.close-zoom-modal-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 1001;
+}
+
+.close-zoom-modal-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 992px) {
+  .admin-report-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-report-details-title-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .report-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

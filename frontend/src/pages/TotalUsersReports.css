@@ -1,0 +1,59 @@
+.users-reports-container {
+  padding: 20px;
+}
+
+.users-reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.users-reports-table th,
+.users-reports-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.users-reports-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.action-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.edit-button {
+  background-color: #ffc107; /* Yellow */
+  color: black;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.action-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading,
+.error {
+  text-align: center;
+  margin-top: 20px;
+}

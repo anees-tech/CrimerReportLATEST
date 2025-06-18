@@ -1,0 +1,199 @@
+.admin-report-list-container {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.admin-report-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.admin-report-list-title {
+  font-size: 1.9rem;
+  color: #333;
+  margin: 0;
+  font-weight: 500;
+}
+
+.back-to-overview-btn {
+  font-size: 0.9rem;
+}
+
+.admin-report-list-loading,
+.admin-report-list-error,
+.no-reports-message {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 1.1rem;
+  color: #555;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.admin-report-list-error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.admin-report-list-filters {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #343a40;
+  font-size: 0.95rem;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-button {
+  padding: 7px 14px;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  color: #495057;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.filter-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+}
+
+.admin-reports-table-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+}
+
+.admin-reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px; /* Ensure horizontal scroll for smaller viewports */
+}
+
+.admin-reports-table th,
+.admin-reports-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: middle;
+}
+
+.admin-reports-table th {
+  background-color: #f1f3f5;
+  font-weight: 600;
+  color: #343a40;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.admin-reports-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-reports-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.admin-reports-table td {
+  font-size: 0.9rem;
+  color: #495057;
+  max-width: 180px; /* For ellipsis on long text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin-reports-table td:first-child { max-width: 100px; } /* ID column */
+.admin-reports-table td.actions-cell {
+  max-width: none; /* Allow actions cell to take more space */
+  white-space: nowrap;
+  text-align: right;
+}
+
+.btn-sm {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  border-radius: 0.2rem;
+}
+
+.btn-action {
+  margin-left: 5px;
+}
+
+.btn-view {
+  background-color: #17a2b8; /* Info */
+  border-color: #17a2b8;
+  color: white;
+}
+.btn-view:hover { background-color: #138496; border-color: #117a8b;}
+
+.btn-delete {
+  background-color: #dc3545; /* Danger */
+  border-color: #dc3545;
+  color: white;
+}
+.btn-delete:hover { background-color: #c82333; border-color: #bd2130;}
+.btn-delete:disabled { background-color: #ccc; border-color: #ccc; }
+
+
+/* Badge styles (ensure these are defined globally or here) */
+.badge {
+  display: inline-block;
+  padding: .4em .7em;
+  font-size: .75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .375rem;
+}
+
+.badge-pending { background-color: #ffc107; color: #212529; }
+.badge-investigating { background-color: #17a2b8; color: white; }
+.badge-resolved { background-color: #28a745; color: white; }
+.badge-closed { background-color: #6c757d; color: white; }
+.badge-cancelled { background-color: #ef5350; color: white; } /* Distinct color for cancelled */
+.badge-default { background-color: #adb5bd; color: #212529; }
+
+@media (max-width: 768px) {
+  .admin-report-list-filters { flex-direction: column; align-items: stretch; }
+  .filter-buttons { justify-content: center; }
+  .filter-button { flex-grow: 1; text-align: center; }
+  .admin-report-list-header { flex-direction: column; align-items: flex-start; gap: 10px;}
+}
