@@ -195,11 +195,12 @@ export const addAdminNote = async (req, res) => {
   }
 }
 
-// Fetch total users and their reports
+// Fetch total users and their reports (including admins)
 export const getUsersReports = async (req, res) => {
   try {
+    // Get regular users
     const users = await User.find()
-    const usersReports = await Promise.all(
+    const regularUsersReports = await Promise.all(
       users.map(async (user) => {
         const reportsCount = await Report.countDocuments({ user: user._id })
         return {
@@ -207,10 +208,30 @@ export const getUsersReports = async (req, res) => {
           name: user.name,
           email: user.email,
           reportsCount,
+          role: "user"
         }
       }),
     )
-    res.json(usersReports)
+
+    // Get admin users
+    const admins = await Admin.find()
+    const adminUsersReports = await Promise.all(
+      admins.map(async (admin) => {
+        const reportsCount = await Report.countDocuments({ user: admin._id })
+        return {
+          _id: admin._id,
+          name: "Admin User", // Admins don't have names in the schema
+          email: admin.email,
+          reportsCount,
+          role: "admin"
+        }
+      }),
+    )
+
+    // Combine both arrays
+    const allUsersReports = [...regularUsersReports, ...adminUsersReports]
+    
+    res.json(allUsersReports)
   } catch (error) {
     console.error("Error fetching users and reports:", error)
     res.status(500).json({ message: "Failed to fetch users and reports" })
@@ -330,5 +351,86 @@ export const getDashboardStats = async (req, res) => {
   } catch (error) {
     console.error("Error fetching dashboard stats:", error)
     res.status(500).json({ message: "Server error fetching dashboard stats" })
+  }
+}
+
+// Toggle user role between admin and regular user
+export const toggleUserRole = async (req, res) => {
+  try {
+    console.log("🔄 toggleUserRole function called")
+    console.log("📋 Request params:", req.params)
+    console.log("📋 Request body:", req.body)
+    
+    const { userId } = req.params
+    const { currentAdminId } = req.body // Destructure properly
+    
+    console.log("👤 User ID to toggle:", userId)
+    console.log("👤 Current Admin ID:", currentAdminId)
+    
+    // Prevent admin from changing their own role
+    if (userId === currentAdminId) {
+      console.log("❌ Admin trying to change own role")
+      return res.status(400).json({ message: "You cannot change your own role" })
+    }
+
+    // Check if user exists in User collection
+    console.log("🔍 Checking User collection...")
+    const regularUser = await User.findById(userId)
+    
+    if (regularUser) {
+      console.log("✅ Found regular user, promoting to admin")
+      // User is currently a regular user, promote to admin
+      const newAdmin = await Admin.create({
+        email: regularUser.email,
+        password: regularUser.password,
+      })
+      
+      // Remove from User collection
+      await User.deleteOne({ _id: userId })
+      
+      console.log("✅ User promoted successfully")
+      return res.json({ 
+        message: "User promoted to admin successfully",
+        newRole: "admin",
+        newId: newAdmin._id
+      })
+    }
+    
+    // Check if user exists in Admin collection
+    console.log("🔍 Checking Admin collection...")
+    const adminUser = await Admin.findById(userId)
+    
+    if (adminUser) {
+      console.log("✅ Found admin user, demoting to regular user")
+      // User is currently an admin, demote to regular user
+      const userReports = await Report.findOne({ user: userId })
+      const userName = userReports?.user?.name || "Former Admin"
+      
+      const newUser = await User.create({
+        name: userName,
+        email: adminUser.email,
+        password: adminUser.password,
+      })
+      
+      // Remove from Admin collection
+      await Admin.deleteOne({ _id: userId })
+      
+      console.log("✅ Admin demoted successfully")
+      return res.json({ 
+        message: "Admin demoted to user successfully",
+        newRole: "user",
+        newId: newUser._id
+      })
+    }
+    
+    console.log("❌ User not found in either collection")
+    return res.status(404).json({ message: "User not found" })
+    
+  } catch (error) {
+    console.error("❌ Error toggling user role:", error)
+    if (error.code === 11000) {
+      return res.status(400).json({ message: "Email already exists in the target role" })
+    }
+    res.status(500).json({ message: "Server error" })
   }
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom" // Import useNavigate
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import "./TotalUsersReports.css"
 
@@ -9,7 +9,10 @@ const TotalUsersReports = () => {
   const [usersReports, setUsersReports] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
-  const navigate = useNavigate() // Initialize useNavigate
+  const [toggleLoading, setToggleLoading] = useState({})
+  const navigate = useNavigate()
+
+  const currentAdminId = sessionStorage.getItem("adminId") // Get current admin ID
 
   useEffect(() => {
     const fetchUsersReports = async () => {
@@ -27,9 +30,7 @@ const TotalUsersReports = () => {
   }, [])
 
   const handleEditUser = (userId) => {
-    // Navigate to an edit user page (you'll need to create this component and route)
     navigate(`/admin/edit-user/${userId}`)
-    console.log("Edit user:", userId) // Placeholder
   }
 
   const handleDeleteUser = async (userId) => {
@@ -38,13 +39,58 @@ const TotalUsersReports = () => {
         setLoading(true)
         await axios.delete(`http://localhost:5000/api/admin/users/${userId}`)
         setUsersReports(usersReports.filter((user) => user._id !== userId))
-        setError("") // Clear any previous error
+        setError("")
       } catch (err) {
         setError(err.response?.data?.message || "Failed to delete user")
       } finally {
         setLoading(false)
       }
     }
+  }
+
+  const handleToggleRole = async (userId, currentRole) => {
+    const action = currentRole === "admin" ? "demote to user" : "promote to admin"
+    
+    if (window.confirm(`Are you sure you want to ${action}? This will change their access permissions.`)) {
+      try {
+        setToggleLoading(prev => ({ ...prev, [userId]: true }))
+        
+        const response = await axios.put(
+          `http://localhost:5000/api/admin/users/${userId}/toggle-role`,
+          { currentAdminId }
+        )
+        
+        // Update the user in the list with new role and ID
+        setUsersReports(prevUsers => 
+          prevUsers.map(user => 
+            user._id === userId 
+              ? { 
+                  ...user, 
+                  _id: response.data.newId, 
+                  role: response.data.newRole,
+                  name: response.data.newRole === "admin" ? "Admin User" : user.name
+                }
+              : user
+          )
+        )
+        
+        setError("")
+        alert(response.data.message)
+      } catch (err) {
+        setError(err.response?.data?.message || "Failed to toggle user role")
+        alert(err.response?.data?.message || "Failed to toggle user role")
+      } finally {
+        setToggleLoading(prev => ({ ...prev, [userId]: false }))
+      }
+    }
+  }
+
+  const getRoleBadgeClass = (role) => {
+    return role === "admin" ? "role-badge-admin" : "role-badge-user"
+  }
+
+  const isCurrentAdmin = (userId) => {
+    return userId === currentAdminId
   }
 
   if (loading && usersReports.length === 0) {
@@ -66,8 +112,9 @@ const TotalUsersReports = () => {
             <tr>
               <th>User Name</th>
               <th>Email</th>
+              <th>Role</th>
               <th>Total Reports</th>
-              <th>Actions</th> {/* Add Actions header */}
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -75,19 +122,36 @@ const TotalUsersReports = () => {
               <tr key={user._id}>
                 <td>{user.name || "Anonymous"}</td>
                 <td>{user.email || "N/A"}</td>
-                <td>{user.reportsCount}</td>
                 <td>
+                  <span className={`role-badge ${getRoleBadgeClass(user.role)}`}>
+                    {user.role === "admin" ? "Admin" : "User"}
+                  </span>
+                </td>
+                <td>{user.reportsCount}</td>
+                <td className="actions-cell">
                   <button
                     onClick={() => handleEditUser(user._id)}
                     className="action-button edit-button"
-                    disabled={loading}
+                    disabled={loading || isCurrentAdmin(user._id)}
+                    title={isCurrentAdmin(user._id) ? "Cannot edit your own account" : "Edit user"}
                   >
                     Edit
                   </button>
+                  
+                  <button
+                    onClick={() => handleToggleRole(user._id, user.role)}
+                    className={`action-button toggle-button ${user.role === "admin" ? "demote" : "promote"}`}
+                    disabled={loading || toggleLoading[user._id] || isCurrentAdmin(user._id)}
+                    title={isCurrentAdmin(user._id) ? "Cannot change your own role" : `${user.role === "admin" ? "Demote to User" : "Promote to Admin"}`}
+                  >
+                    {toggleLoading[user._id] ? "Processing..." : (user.role === "admin" ? "Demote" : "Promote")}
+                  </button>
+                  
                   <button
                     onClick={() => handleDeleteUser(user._id)}
                     className="action-button delete-button"
-                    disabled={loading}
+                    disabled={loading || isCurrentAdmin(user._id)}
+                    title={isCurrentAdmin(user._id) ? "Cannot delete your own account" : "Delete user"}
                   >
                     Delete
                   </button>

@@ -5,12 +5,13 @@ import {
   getReportById,
   updateReportStatus,
   addAdminNote,
-  uploadAdminNoteFile, // Make sure this is imported
+  uploadAdminNoteFile,
   getUsersReports,
-  getUserByIdForAdmin, // Import new controller
-  updateUserByAdmin,   // Import new controller
-  deleteUserByAdmin,   // Import new controller
-  getDashboardStats,   // Import the new controller function
+  getUserByIdForAdmin,
+  updateUserByAdmin,
+  deleteUserByAdmin,
+  getDashboardStats,
+  toggleUserRole,
 } from "../controllers/adminController.js"
 import { deleteReport } from "../controllers/reportController.js"
 
@@ -31,7 +32,7 @@ router.get("/reports/:id", getReportById)
 // Update report status
 router.put("/reports/:id/status", updateReportStatus)
 
-// Add admin note to report - Apply multer middleware to handle file uploads
+// Add admin note to report
 router.post("/reports/:id/notes", uploadAdminNoteFile.single("attachment"), addAdminNote)
 
 // Fetch total users and their reports
@@ -46,6 +47,13 @@ router.put("/users/:userId", updateUserByAdmin)
 
 // Delete a user by ID (for admin)
 router.delete("/users/:userId", deleteUserByAdmin)
+
+// Toggle user role (admin <-> user) - Make sure this is properly defined
+router.put("/users/:userId/toggle-role", (req, res, next) => {
+  console.log("🔄 Toggle role route hit:", req.params.userId)
+  console.log("📝 Request body:", req.body)
+  next()
+}, toggleUserRole)
 
 // Delete a report by ID
 router.delete("/reports/:id", deleteReport)

@@ -20,6 +20,10 @@
   font-weight: bold;
 }
 
+.actions-cell {
+  white-space: nowrap;
+}
+
 .action-button {
   padding: 5px 10px;
   margin-right: 5px;
@@ -27,6 +31,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9em;
+  transition: background-color 0.3s ease;
 }
 
 .edit-button {
@@ -34,8 +39,26 @@
   color: black;
 }
 
-.edit-button:hover {
+.edit-button:hover:not(:disabled) {
   background-color: #e0a800;
+}
+
+.toggle-button.promote {
+  background-color: #28a745;
+  color: white;
+}
+
+.toggle-button.promote:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.toggle-button.demote {
+  background-color: #fd7e14;
+  color: white;
+}
+
+.toggle-button.demote:hover:not(:disabled) {
+  background-color: #e55a0c;
 }
 
 .delete-button {
@@ -43,17 +66,56 @@
   color: white;
 }
 
-.delete-button:hover {
+.delete-button:hover:not(:disabled) {
   background-color: #c82333;
 }
 
 .action-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.role-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.role-badge-admin {
+  background-color: #dc3545;
+  color: white;
+}
+
+.role-badge-user {
+  background-color: #6c757d;
+  color: white;
 }
 
 .loading,
 .error {
   text-align: center;
-  margin-top: 20px;
+  padding: 20px;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .users-reports-table {
+    font-size: 0.8em;
+  }
+  
+  .action-button {
+    padding: 3px 6px;
+    font-size: 0.8em;
+    margin-right: 3px;
+  }
 }
